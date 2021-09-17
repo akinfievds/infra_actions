@@ -56,12 +56,12 @@ jobs:
     needs: build_and_push_to_docker_hub
     steps:
     - name: executing remote ssh commands to deploy
-    uses: appleboy/ssh-action@master
-    with:
-      host: ${{ secrects.HOST }}
-      username: ${{ secrets.SSH_KEY }}
-      passshare: ${{ secrets.PASSPHRASE }}
-      script: |
-        sudo docker pull akinfievds/infra_project
-        sudo docker stop $(sudo docker ps -a -q)
-        sudo docker run --rm -d -p 5000:5000 akinfievds/infra_project
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrects.HOST }}
+        username: ${{ secrets.SSH_KEY }}
+        passshare: ${{ secrets.PASSPHRASE }}
+        script: |
+          sudo docker pull akinfievds/infra_project
+          sudo docker stop $(sudo docker ps -a -q)
+          sudo docker run --rm -d -p 5000:5000 akinfievds/infra_project
